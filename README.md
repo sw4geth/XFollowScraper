@@ -1,52 +1,56 @@
-# Twitter Followers Scraper
+# Twitter Following Scraper
 
-## Overview
+This script scrapes the list of accounts a given X user is following. It uses Selenium to automate the process and extracts the usernames into a text file.  Only working for the first scroll. ~40 accounts.
 
-This Python script is designed to scrape a user's Twitter followers using Selenium and Chrome WebDriver. It navigates to a user's followers page on Twitter, scrolls through the followers list, and saves the data to a CSV file.
+---
 
 ## Prerequisites
 
-- [Python 3.x](https://www.python.org/downloads/)
-- [Chrome browser](https://www.google.com/chrome/) installed
-- Required Python packages (install using `pip install -r requirements.txt`):
-  - `selenium`
-  - `webdriver_manager`
-  - `chromedriver-autoinstaller`
-  - `packaging`
+1. **Python**: Ensure you have Python 3.7 or later installed.
+2. **Google Chrome**: Install the latest version of Google Chrome.
+3. **Chromedriver**: The script will automatically manage Chromedriver using `webdriver_manager`.
 
-  
-## Usage
+---
 
-1. **Clone the repository:**
+## Setup
 
+1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/twitter-followers-scraper.git
-   cd twitter-followers-scraper
+   git clone https://github.com/your-repo/twitter-following-scraper.git
+   cd twitter-following-scraper
+Install dependencies:
 
-2. **Install the required packages:**
+bash
 
-    ```bash
-    pip install -r requirements.txt
+pip install -r requirements.txt
+Create a .env file in the project directory with your Twitter login credentials:
 
-3. **Run the script:**
 
-    ```bash
-    python scraper.py --cookie YOUR_TWITTER_COOKIE --username TARGET_USERNAME --output_folder OUTPUT_FOLDER
+USERNAME=your_twitter_username
+PASSWORD=your_twitter_password
+Usage
+Run the script using the following command:
 
-### Command-Line Arguments
---cookie: Twitter auth_token cookie value (required)
+bash
+python following_scraper.py --username TARGET_USERNAME --output_folder OUTPUT_FOLDER
 
---username: Twitter username to scrape followers (required)
+TARGET_USERNAME: The Twitter username of the user whose following list you want to scrape.
+OUTPUT_FOLDER: The directory where the scraped list will be saved.
+Example:
+bash
+Copy code
+python following_scraper.py --username elonmusk --output_folder ./output
+Output
+The script will save the extracted usernames to a file named TARGET_USERNAME_following.txt in the specified OUTPUT_FOLDER.
 
---output_folder: Output folder to store the CSV file (required)
+#Notes
+You will have to parse the user data 
+Ensure your Twitter account has access to the "following" list of the target user.
+Twitter's dynamic loading may require slower scrolling or longer run times for large "following" lists.
+This script is designed to scrape! Have fun and go wild with it—just remember to be mindful of Twitter's terms of service.
+Troubleshooting
+Not capturing all usernames: Twitter may limit the visible "following" list depending on session state, account type, or scraping patterns. Retry after some time or use a verified account.
+Chromedriver issues: Ensure your Chrome browser is up-to-date, and reinstall dependencies if needed:
 
---option: Specify either "followers" or "following" (required)
-
-### Output
-The script will create a CSV file named TARGET_USERNAME_followers.csv or TARGET_USERNAME_following.csv in the specified output folder. The CSV file contains two columns: 'Name' and 'Username'.
-
-### Notes
-The script may take some time, especially during the first run, as it creates a WebDriver instance and navigates through the followers list.
-
-### Disclaimer
-This script is for educational purposes only. Use it responsibly and respect the terms of service of the websites you are scraping.
+bash
+pip install --upgrade webdriver_manager
